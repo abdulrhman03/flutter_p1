@@ -48,8 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void _navigate (){
     Timer(const Duration(seconds: 4),()async{
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      bool isIntroenterdBefor = prefs.getBool("introenterd") ?? false;
-         GoNavigator.of(context).pushReplacement(isIntroenterdBefor?const Page1():const IntroScreen());
+      bool isIntroenterdBefor = prefs.getBool("introenterd")??false;
+         GoNavigator.of(context).pushReplacement(isIntroenterdBefor ?const Page1():const IntroScreen());
 
 
 

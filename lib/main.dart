@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_p1/registor/register_screen.dart';
 import 'package:flutter_p1/screens/intro_screen.dart';
 
 import 'package:flutter_p1/screens/page1.dart';
@@ -21,7 +22,7 @@ class _indexState extends State<index> {
   Widget build(BuildContext context) {
     return Sizer(builder: (BuildContext context, Orientation orientation,
         DeviceType deviceType) {
-      return MaterialApp(home:SplashScreen(), debugShowCheckedModeBanner: false,);
+      return MaterialApp(home:RegisterScreen(), debugShowCheckedModeBanner: false,);
     },);
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_p1/main.dart';
 import 'package:flutter_p1/screens/page1.dart';
 import 'package:flutter_p1/utils/helpers/navigater.dart';
-import 'package:flutter_p1/utils/intro_page_itemes.dart';
+import 'package:flutter_p1/utils/ui/intro_page_itemes.dart';
 import 'package:flutter_p1/utils/ui/texts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
