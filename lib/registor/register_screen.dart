@@ -2,9 +2,14 @@
 
 import 'dart:io';
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_p1/config/app_constanat.dart';
+import 'package:flutter_p1/registor/register_controller.dart';
 import 'package:flutter_p1/utils/ui/common_views.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
@@ -17,17 +22,17 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController _userNameController=TextEditingController();
+  TextEditingController _emailController=TextEditingController();
   TextEditingController _passwordController=TextEditingController();
   TextEditingController _mobileController=TextEditingController();
-  FocusNode _userNameFocus=FocusNode();
+  FocusNode _emailFocus=FocusNode();
   FocusNode _passwordFocus=FocusNode();
   FocusNode _mobileFocus=FocusNode();
   String? x;
   XFile? file;
   GlobalKey key=GlobalKey<FormState>();
   bool _isPasswordO=true;
-
+RegisterController controller=Get.put(RegisterController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,19 +47,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(children: [const SizedBox(height: AppConstant.textFiealdSpacing,),
      _getPlaseHolder(),
             const SizedBox(height:AppConstant.textFiealdSpacing,),
-              CommonViews().CreatTextForm(controller: _userNameController, focusNode: _userNameFocus,label:"username",InputAction: TextInputAction.next ),
+              Obx(()=> CommonViews().CreatTextForm(controller: _emailController,errorText: controller.emailEerror.value.isEmpty?null: controller.emailEerror.value, focusNode: _emailFocus,label:"email",InputAction: TextInputAction.next )),
               const SizedBox(height: AppConstant.textFiealdSpacing,),
-              CommonViews().CreatTextForm(controller: _passwordController,ObscureText: _isPasswordO, focusNode: _passwordFocus,label: "password",InputAction: TextInputAction.next ,
-                  suffixIcon: InkWell(child: Icon(_isPasswordO?Icons.visibility:Icons.visibility_off),onTap: (){
-                setState(() {
-                  _isPasswordO=!_isPasswordO;
-                });
+              Obx(()=> CommonViews().CreatTextForm(errorText: controller.passwordEerror.value.isEmpty?null: controller.passwordEerror.value,controller: _passwordController,ObscureText: _isPasswordO, focusNode: _passwordFocus,label: "password",InputAction: TextInputAction.next ,
+                    suffixIcon: InkWell(child: Icon(_isPasswordO?Icons.visibility:Icons.visibility_off),onTap: (){
+                  setState(() {
+                    _isPasswordO=!_isPasswordO;
+                  });
 
-              },)) ,
+                },)),
+              ) ,
               const SizedBox(height: AppConstant.textFiealdSpacing,),
               CommonViews().CreatTextForm(controller: _mobileController, focusNode: _mobileFocus,label: "mobail",KeyboardType: TextInputType.number,InputAction: TextInputAction.done,prefixText:"+962"),
             const Spacer(),
-            CommonViews().createButton(title: "Login", onPressed: (){
+            CommonViews().createButton(title: "Register", onPressed: ()async{
+
+           controller.registerWiithEmailAndPassword(_emailController.text, _passwordController.text);
+
             }),SizedBox(height: AppConstant.textFiealdSpacing.w,),
 
             ],

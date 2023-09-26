@@ -28,12 +28,16 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  firebase_core:
+  firebase_auth:
+  flutter_spinkit:
   adaptive_action_sheet: ^2.0.2
   smooth_page_indicator:
   shared_preferences:
   sizer:
   lottie:
   image_picker:
+  get:
   flutter:
     sdk: flutter
   google_fonts:

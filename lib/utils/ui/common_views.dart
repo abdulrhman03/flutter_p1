@@ -9,23 +9,17 @@ class CommonViews{
   factory CommonViews()=> _shared;
   CommonViews._private();
 
-  AppBar getAppBar({required String title,required String imageActions,required String imageLeading,BuildContext? Context}){
+  AppBar getAppBar({required String title, String? imageActions, String? imageLeading,BuildContext? Context}){
     return AppBar(backgroundColor: Colors.red,centerTitle: true,
       title: Title(color: Colors.white, child: Text(title,style:TextStyle(fontSize:24,fontWeight: FontWeight.w500,letterSpacing: 0.48,fontFamily: GoogleFonts.faustina().fontFamily ),)),
-      leading: InkWell(child: Image.asset(imageLeading),
-    onTap: (){
-        Navigator.of(Context!).pop();
-      },
-      ),
-      actions: [
-           Image.asset(imageActions),
-      ],
+
+
     );
   }
   Widget CreatTextForm({required TextEditingController controller,String?prefixText,
-    required FocusNode focusNode,Widget? suffixIcon,required String label,TextInputType KeyboardType=TextInputType.text,TextInputAction InputAction=TextInputAction.done,bool ObscureText=false}){
+    required FocusNode focusNode,Widget? suffixIcon,required String label,TextInputType KeyboardType=TextInputType.text,TextInputAction InputAction=TextInputAction.done,bool ObscureText=false,String ? errorText}){
     return TextFormField(controller: controller,focusNode: focusNode,
-      decoration: InputDecoration(labelText: label,prefixText: prefixText,suffixIcon: suffixIcon,
+      decoration: InputDecoration(labelText: label,prefixText: prefixText,suffixIcon: suffixIcon,errorText: errorText,
           border: _getBorder(),enabledBorder: _getBorder(),disabledBorder: _getBorder(),focusedBorder: _getBorder()),
 keyboardType:KeyboardType ,textInputAction:InputAction ,obscureText: ObscureText,
     );
@@ -48,5 +42,9 @@ keyboardType:KeyboardType ,textInputAction:InputAction ,obscureText: ObscureText
           textColor: Colors.white,
         ));
   }
+
+
+
 }
+
 
